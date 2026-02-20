@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détail Signalement - HotSpot</title>
+    <!-- Fichier CSS externe (interopérabilité : style séparé du HTML) -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ============================================
+         HEADER GLOBAL
+         Même navigation que sur toutes les pages.
+         "active" sur HotSpot car cette page en fait partie.
+    ============================================ -->
+    <header>
+        <div class="header-content">
+            <div class="brand">LE RECENSEMENT</div>
+            <nav>
+                <a href="home.html" class="nav-link">Accueil</a>
+                <!-- active sur HotSpot car hotspot-detail fait
+                     partie de la section HotSpot -->
+                <a href="hotspot.html" class="nav-link active">HotSpot</a>
+                <a href="mutants.html" class="nav-link">Mutants</a>
+                <a href="superiors.html" class="nav-link">Homo Superior</a>
+                <a href="transmission.html" class="nav-link">Transmission</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- ============================================
+             CONTENEUR DYNAMIQUE
+             Ce <div> est VIDE dans le HTML.
+             Son contenu est généré entièrement par JavaScript
+             via la fonction initHotspotDetail() dans script.js.
+
+             Le JS lit le paramètre ?id= dans l'URL,
+             cherche les données correspondantes dans l'objet
+             hotspotsData, puis injecte le HTML avec innerHTML.
+
+             id="hotspot-detail" permet à JavaScript de cibler
+             ce conteneur avec document.getElementById().
+        ============================================ -->
+        <section class="hotspot-detail-section">
+            <div id="hotspot-detail" class="hotspot-detail-container">
+                <!-- Contenu généré dynamiquement par script.js -->
+                <!-- En attendant le chargement, on affiche un message -->
+                <p style="text-align:center; color:#888; padding:60px 20px;">
+                    ⏳ Chargement du signalement...
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ============================================
+         FOOTER
+         Identique sur toutes les pages.
+    ============================================ -->
+    <footer id="contact">
+        <p>Ce site n'est pas affilié officiellement à Trask Industries.</p>
+        <p>Vous avez vu quelque chose ? 
+            <a href="mailto:alt.cq-4p92pch@yopmail.com" class="secret-link">
+                Envoyez les données cryptées ici
+            </a>.
+    </footer>
+      <!-- ============================================
+         LIGHTBOX — VISIONNEUSE D'IMAGE PLEIN ÉCRAN
+         Conteneur caché par défaut.
+         Quand on clique sur une image de preuve, JavaScript
+         copie son src ici et affiche ce conteneur.
+    ============================================ -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" class="lightbox-img" src="" alt="Photo agrandie">
+        <p id="lightbox-caption" class="lightbox-caption"></p>
+    </div>
+
+    <!-- ============================================
+         SCRIPTS
+         script.js contient :
+         - hotspotsData : la base de données des signalements
+         - initHotspotDetail() : lit l'URL, trouve les données,
+           génère le HTML et l'injecte dans #hotspot-detail
+
+         L'ordre est important : script.js doit être chargé
+         APRÈS le HTML pour que getElementById() trouve le
+         conteneur #hotspot-detail.
+    ============================================ -->
+    <script src="script.js"></script>
+    <script>
+        /* Vérification de session : redirection si l'utilisateur
+           n'est pas passé par le login (index.html) */
+        if (sessionStorage.getItem('accessGranted') !== 'true') {
+            window.location.href = 'index.html';
+        }
+    </script>
+
+</body>
+</html>

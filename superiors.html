@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homo Superior - Menaces Globales</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <div class="brand">LE RECENSEMENT</div>
+            <nav>
+                <a href="home.html" class="nav-link">Accueil</a>
+                <a href="hotspot.html" class="nav-link">HotSpot</a>
+                <a href="mutants.html" class="nav-link">Mutants</a>
+                <a href="superiors.html" class="nav-link active">Homo Superior</a>
+                <a href="transmission.html" class="nav-link">Transmission</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-title-section">
+            <h1>👁️ HOMO SUPERIOR — MENACES GLOBALES</h1>
+            <p class="subtitle">
+                Entités surhumaines non classifiées comme mutants. 
+                Origine des pouvoirs : diverse (technologie, magie, accident, extraterrestre).
+            </p>
+        </section>
+
+        <section id="search-section">
+            <!-- Même principe que mutants.html mais avec le type 'superior' -->
+            <input type="text" 
+                   id="search-bar" 
+                   placeholder="Rechercher un Homo Superior..." 
+                   onkeyup="filterByType('superior')">
+        </section>
+
+        <section class="database-container">
+            <div class="category-block">
+                <!-- On utilise l'ID "superior-list" pour cibler ce conteneur en JS -->
+                <div class="card-list" id="superior-list">
+                    <!-- Contenu généré dynamiquement par JavaScript -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact">
+        <p>Ce site n'est pas affilié officiellement à Trask Industries.</p>
+        <p>Vous avez vu quelque chose ? 
+            <a href="mailto:alt.cq-4p92pch@yopmail.com" class="secret-link">
+                Envoyez les données cryptées ici
+            </a>.
+        </p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        if (sessionStorage.getItem('accessGranted') !== 'true') {
+            window.location.href = 'index.html';
+        }
+
+        // Initialisation : afficher uniquement les Homo Superior
+        renderByType('superior');
+    </script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dossier Confidentiel - TRASK</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dossier-body">
+
+    <!-- Barre de navigation simple -->
+<nav class="top-nav">
+    <!-- L'id "back-link" permet à JavaScript de modifier
+         dynamiquement la destination du bouton retour
+         selon la page d'où vient l'utilisateur -->
+    <a href="home.html" id="back-link" class="back-btn">← RETOUR À LA BASE DE DONNÉES</a>
+    <span class="logo">TRASK INDUSTRIES // DATABASE</span>
+</nav>
+
+    <div class="container">
+        <!-- Conteneur du Dossier -->
+        <div class="dossier-container">
+            
+            <!-- En-tête du dossier "TOP SECRET" -->
+            <div class="dossier-header">
+                <h1>DOSSIER DE SURVEILLANCE</h1>
+                <div class="stamp">TOP SECRET</div>
+            </div>
+
+            <div class="dossier-content">
+                <!-- Colonne Gauche : Photo et ID -->
+                <div class="profile-sidebar">
+                    <img id="profile-img" src="" alt="Photo du sujet">
+                    <div class="data-block">
+                        <label>IDENTIFIANT</label>
+                        <span id="profile-id">LOADING...</span>
+                    </div>
+                    <div class="data-block">
+                        <label>NIVEAU DE MENACE</label>
+                        <span id="profile-classe" class="classe-badge">...</span>
+                    </div>
+                </div>
+
+                <!-- Colonne Droite : Informations -->
+                <div class="profile-main">
+                    <h2 id="profile-alias">NOM DE CODE</h2>
+                    <h3 id="profile-name">Nom Réel</h3>
+                    
+                    <hr>
+
+                    <div class="info-section">
+                        <h4>CAPACITÉS RECENSÉES</h4>
+                        <ul id="profile-powers">
+                            <!-- Liste générée par JS -->
+                        </ul>
+                    </div>
+
+                    <div class="info-section">
+                        <h4>NOTE</h4>
+                        <p class="notes">
+                            Le sujet a été repéré par nos algorithmes. 
+                            Son appartenance à la catégorie <span id="profile-type"></span> 
+                            nécessite une surveillance accrue. Trask Industries refuse de commenter 
+                            l'existence de cet individu.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

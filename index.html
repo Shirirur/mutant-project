@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accès Restreint — Le Recensement</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="login-page">
+
+    <!-- ============================================
+         FOND ANIMÉ — LIGNES DE CODE DÉFILANTES
+         Simule un écran de terminal / données qui
+         scrollent en arrière-plan pour l'ambiance.
+         Chaque <span> contient du faux code qui
+         défile grâce à une animation CSS.
+    ============================================ -->
+    <div class="matrix-bg" aria-hidden="true">
+        <span>SCANNING GENOME... 0xF4A3B2</span>
+        <span>TRASK_INDUSTRIES::SENTINEL_v2.4</span>
+        <span>SUBJECT_DETECTED::LAT:40.7128_LNG:-74.0060</span>
+        <span>GENE_X::CONFIRMED::THREAT_LEVEL=OMEGA</span>
+        <span>DECRYPT... 0x8B2FA1... ACCESS DENIED</span>
+        <span>MUTANT_REGISTRY::ENTRY_#00471</span>
+        <span>SCANNING GENOME... 0xC7D9E3</span>
+        <span>CEREBRO_SIGNAL::AMPLITUDE=87.3%</span>
+        <span>TRASK_INDUSTRIES::SENTINEL_v2.4</span>
+        <span>SUBJECT_DETECTED::LAT:48.8566_LNG:2.3522</span>
+        <span>CLASSIFICATION::HOMO_SUPERIOR</span>
+        <span>DECRYPT... 0x3F7A22... PARTIAL MATCH</span>
+    </div>
+
+    <!-- ============================================
+         CONTENEUR PRINCIPAL DE LOGIN
+         Centré verticalement et horizontalement
+         grâce à flexbox sur .login-page (CSS).
+    ============================================ -->
+    <div class="login-container">
+
+        <!-- ============================================
+             EN-TÊTE DE LA BOÎTE DE LOGIN
+             Logo ASCII + titre pour l'ambiance terminal.
+        ============================================ -->
+        <div class="login-header">
+            <!-- Art ASCII léger pour simuler un logo de terminal -->
+            <pre class="ascii-logo" aria-hidden="true">
+ ██████╗ ███████╗ ██████╗
+ ██╔══██╗██╔════╝██╔════╝
+ ██████╔╝█████╗  ██║     
+ ██╔══██╗██╔══╝  ██║     
+ ██║  ██║███████╗╚██████╗
+ ╚═╝  ╚═╝╚══════╝ ╚═════╝
+            </pre>
+            <h1 class="login-title">LE RECENSEMENT</h1>
+            <p class="login-classification">// DOCUMENT CLASSIFIÉ — NIVEAU 5 //</p>
+        </div>
+
+        <!-- ============================================
+             LIGNE DE SÉPARATION ANIMÉE
+             Un simple <hr> stylisé avec une animation
+             de pulsation en CSS (glow).
+        ============================================ -->
+        <hr class="login-divider">
+
+        <!-- ============================================
+             SECTION TEXTE D'AMBIANCE
+             Contexte narratif pour le visiteur.
+        ============================================ -->
+        <div class="login-lore">
+            <p class="lore-text">
+                ⚠️ Vous accédez à un terminal non référencé.
+            </p>
+            <p class="lore-text">
+                Cette base de données recense les individus dotés de capacités 
+                surhumaines — <strong>Mutants</strong> porteurs du Gène X et 
+                <strong>Homo Superior</strong> aux pouvoirs acquis.
+            </p>
+            <p class="lore-text">
+                Les corporations nient leur existence. 
+                <strong>Nous documentons la vérité.</strong>
+            </p>
+        </div>
+
+        <!-- ============================================
+             FORMULAIRE D'ACCÈS
+             L'input attend la clé secrète.
+             onsubmit="return false" empêche le rechargement
+             de la page par le formulaire HTML natif.
+             La vérification se fait en JavaScript via
+             la fonction checkAccess() dans script.js.
+        ============================================ -->
+        <form class="login-form" onsubmit="return false">
+            <label for="access-key" class="login-label">
+                🔑 CLÉ D'AUTHENTIFICATION REQUISE
+            </label>
+
+            <!-- Le champ type="password" masque la saisie
+                 avec des points pour renforcer l'ambiance secrète.
+                 autocomplete="off" empêche le navigateur de
+                 proposer des suggestions de mots de passe. -->
+            <input 
+                type="password" 
+                id="access-key" 
+                class="login-input"
+                placeholder="Entrez la clé d'accès..."
+                autocomplete="off"
+                autofocus
+            >
+
+            <!-- Zone d'erreur masquée par défaut.
+                 JavaScript la rend visible si la clé est incorrecte. -->
+            <p id="error-msg" class="login-error" style="display: none;">
+                ❌ CLÉ INVALIDE — Accès refusé. Tentative enregistrée.
+            </p>
+
+            <!-- Le bouton déclenche checkAccess() définie dans script.js -->
+            <button type="submit" class="login-btn" onclick="checkAccess()">
+                VÉRIFIER L'ACCÈS →
+            </button>
+        </form>
+
+        <!-- ============================================
+             INDICE SUBTIL
+             Pour que le visiteur puisse trouver la clé
+             sans être bloqué. L'indice est discret,
+             stylisé en texte très atténué.
+        ============================================ -->
+        <div class="login-hint">
+            <p>Indice : Le nom de ceux qui chassent les mutants.</p>
+        </div>
+
+        <!-- ============================================
+             PIED DE LA BOÎTE DE LOGIN
+             Informations de contexte supplémentaires.
+        ============================================ -->
+        <div class="login-footer-info">
+            <p class="system-info">TERMINAL #7X-0R4 — Connexion chiffrée 256-bit</p>
+            <p class="system-info">Dernière mise à jour du registre : <span id="login-date"></span></p>
+        </div>
+    </div>
+
+    <!-- ============================================
+         SCRIPTS
+         script.js contient checkAccess() qui :
+         1. Lit la valeur de #access-key
+         2. Compare avec la clé secrète "TRASK"
+         3. Si correct : stocke dans sessionStorage
+            et redirige vers home.html
+         4. Si incorrect : affiche #error-msg
+    ============================================ -->
+    <script src="script.js"></script>
+
+    <!-- Script en ligne pour afficher la date du jour
+         dynamiquement dans le pied de la boîte de login -->
+    <script>
+        /* toLocaleDateString() formate un objet Date
+           selon la locale spécifiée (ici français).
+           Les options permettent de choisir le format. */
+        const dateSpan = document.getElementById('login-date');
+        if (dateSpan) {
+            dateSpan.textContent = new Date().toLocaleDateString('fr-FR', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric'
+            });
+        }
+    </script>
+</body>
+</html>

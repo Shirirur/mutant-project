@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <!-- La balise viewport rend la page responsive sur mobile et tablette -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HotSpot - Signalements Terrain</title>
+    <!-- Fichier CSS externe pour la mise en forme (interopérabilité) -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ============================================
+         HEADER GLOBAL
+         Navigation identique sur toutes les pages.
+         "active" sur HotSpot car c'est la page courante.
+    ============================================ -->
+    <header>
+        <div class="header-content">
+            <div class="brand">LE RECENSEMENT</div>
+            <nav>
+                <a href="home.html" class="nav-link">Accueil</a>
+                <!-- Classe "active" pour indiquer la page courante -->
+                <a href="hotspot.html" class="nav-link active">HotSpot</a>
+                <a href="mutants.html" class="nav-link">Mutants</a>
+                <a href="superiors.html" class="nav-link">Homo Superior</a>
+                <a href="transmission.html" class="nav-link">Transmission</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- ============================================
+             SECTION TITRE DE PAGE
+             Contextualise immédiatement le contenu.
+        ============================================ -->
+        <section class="page-title-section">
+            <h1>⚠️ HOTSPOT — SIGNALEMENTS TERRAIN</h1>
+            <p class="subtitle">
+                Dernières observations et photos capturées à la volée. 
+                Sources multiples — fiabilité variable.
+            </p>
+        </section>
+
+        <!-- ============================================
+             BARRE DE FILTRE
+             Permet de filtrer les signalements par catégorie.
+             Chaque bouton porte un attribut data-filter
+             qui sera lu par JavaScript pour le tri.
+        ============================================ -->
+        <section class="hotspot-filters">
+            <div class="filter-bar">
+                <!-- data-filter="all" : attribut personnalisé HTML5.
+                     JavaScript lit cette valeur avec element.dataset.filter
+                     pour savoir quel filtre appliquer. -->
+                <button class="filter-btn active" data-filter="all">TOUS</button>
+                <button class="filter-btn" data-filter="mutant">MUTANTS</button>
+                <button class="filter-btn" data-filter="superior">HOMO SUPERIOR</button>
+                <button class="filter-btn" data-filter="inconnu">NON IDENTIFIÉ</button>
+            </div>
+        </section>
+
+        <!-- ============================================
+             GRILLE DES SIGNALEMENTS
+             Chaque carte est un <a> (lien cliquable) qui
+             mène vers hotspot-detail.html?id=HS-XXX.
+
+             Attributs importants :
+             - data-category : catégorie pour le filtrage JS
+             - href : lien avec paramètre GET ?id= pour
+               identifier le signalement sur la page détail
+        ============================================ -->
+        <section class="hotspot-grid-section">
+            <div class="hotspot-grid">
+
+                <!-- ======= SIGNALEMENT HS-001 ======= -->
+                <a href="hotspot-detail.html?id=HS-001" 
+                   class="hotspot-card" 
+                   data-category="mutant">
+                    <!-- Image d'aperçu capturée à la volée -->
+                    <div class="hotspot-img">
+                        <img src="assets/img/hotspot/elec.png" 
+                             alt="Photo floue — décharge électrique dans une ruelle">
+                        <!-- Badge superposé sur l'image via CSS position:absolute -->
+                        <span class="hotspot-badge urgent">URGENT</span>
+                    </div>
+                    <div class="hotspot-info">
+                        <!-- Identifiant unique du signalement -->
+                        <span class="hotspot-id">HS-001</span>
+                        <h3>Décharge électrique non naturelle</h3>
+                        <p class="hotspot-location">📍 Hell's Kitchen, New York</p>
+                        <p class="hotspot-date">🕐 12/01/2025 — 23h47</p>
+                        <!-- Tag de catégorie pour identification visuelle -->
+                        <span class="hotspot-tag tag-mutant">MUTANT PRÉSUMÉ</span>
+                    </div>
+                </a>
+
+                <!-- ======= SIGNALEMENT HS-002 ======= -->
+                <a href="hotspot-detail.html?id=HS-002" 
+                   class="hotspot-card" 
+                   data-category="superior">
+                    <div class="hotspot-img">
+                        <img src="assets/img/hotspot/fly.png" 
+                             alt="Silhouette volante au-dessus d'un immeuble">
+                        <span class="hotspot-badge confirmed">CONFIRMÉ</span>
+                    </div>
+                    <div class="hotspot-info">
+                        <span class="hotspot-id">HS-002</span>
+                        <h3>Vol stationnaire au-dessus du Bronx</h3>
+                        <p class="hotspot-location">📍 South Bronx, New York</p>
+                        <p class="hotspot-date">🕐 08/01/2025 — 04h12</p>
+                        <span class="hotspot-tag tag-superior">HOMO SUPERIOR</span>
+                    </div>
+                </a>
+
+                <!-- ======= SIGNALEMENT HS-003 ======= -->
+                <a href="hotspot-detail.html?id=HS-003" 
+                   class="hotspot-card" 
+                   data-category="mutant">
+                    <div class="hotspot-img">
+                        <img src="assets/img/hotspot/feng.png" 
+                             alt="Marques de griffes profondes sur un mur en béton">
+                        <span class="hotspot-badge recent">RÉCENT</span>
+                    </div>
+                    <div class="hotspot-info">
+                        <span class="hotspot-id">HS-003</span>
+                        <h3>Griffures profondes sur structure en béton</h3>
+                        <p class="hotspot-location">📍 Toronto, Canada</p>
+                        <p class="hotspot-date">🕐 15/01/2025 — 19h30</p>
+                        <span class="hotspot-tag tag-mutant">MUTANT PRÉSUMÉ</span>
+                    </div>
+                </a>
+
+                <!-- ======= SIGNALEMENT HS-004 ======= -->
+                <a href="hotspot-detail.html?id=HS-004" 
+                   class="hotspot-card" 
+                   data-category="superior">
+                    <div class="hotspot-img">
+                        <img src="assets/img/hotspot/spider.jpeg" 
+                             alt="Escalade du bâtiment avec des toiles">
+                        <span class="hotspot-badge confirmed">CONFIRMÉ</span>
+                    </div>
+                    <div class="hotspot-info">
+                        <span class="hotspot-id">HS-004</span>
+                        <h3>Homme escaladant un mur avec des toiles — Saut surhumain</h3>
+                        <p class="hotspot-location">📍 Central Park, New York</p>
+                        <p class="hotspot-date">🕐 18/01/2025 — 23h05</p>
+                        <span class="hotspot-tag tag-superior">HOMO SUPERIOR</span>
+                    </div>
+                </a>
+
+                <!-- ======= SIGNALEMENT HS-005 ======= -->
+                <a href="hotspot-detail.html?id=HS-005" 
+                   class="hotspot-card" 
+                   data-category="superior">
+                    <div class="hotspot-img">
+                        <img src="assets/img/hotspot/carfly.png" 
+                             alt="Voiture retournée par une force invisible">
+                        <span class="hotspot-badge confirmed">CONFIRMÉ</span>
+                    </div>
+                    <div class="hotspot-info">
+                        <span class="hotspot-id">HS-005</span>
+                        <h3>Télékinésie — Véhicule projeté à 15 mètres</h3>
+                        <p class="hotspot-location">📍 Camden, Londres</p>
+                        <p class="hotspot-date">🕐 20/01/2025 — 21h33</p>
+                        <span class="hotspot-tag tag-superior">HOMO SUPERIOR</span>
+                    </div>
+                </a>
+
+                <!-- ======= SIGNALEMENT HS-006 ======= -->
+                <a href="hotspot-detail.html?id=HS-006" 
+                   class="hotspot-card" 
+                   data-category="inconnu">
+                    <div class="hotspot-img">
+                        <img src="assets/img/hotspot/agathouse.png" 
+                             alt="Lumière violette émanant d'un sous-sol">
+                        <span class="hotspot-badge recent">RÉCENT</span>
+                    </div>
+                    <div class="hotspot-info">
+                        <span class="hotspot-id">HS-006</span>
+                        <h3>Emanation lumineuse violette — Origine inconnue</h3>
+                        <p class="hotspot-location">📍 Westview, New Jersey</p>
+                        <p class="hotspot-date">🕐 22/01/2025 — 02h15</p>
+                        <span class="hotspot-tag tag-inconnu">NON IDENTIFIÉ</span>
+                    </div>
+                </a>
+
+            </div>
+        </section>
+
+        <!-- ============================================
+             AVERTISSEMENT EN BAS DE PAGE
+             Rappelle le contexte clandestin du site.
+        ============================================ -->
+        <section class="hotspot-disclaimer">
+            <div class="disclaimer-box">
+                <h3>⚠️ AVERTISSEMENT</h3>
+                <p>
+                    Les signalements présentés ici proviennent de sources terrain non vérifiées. 
+                    Le niveau de fiabilité varie. Si vous disposez d'informations complémentaires, 
+                    utilisez le <a href="transmission.html">canal de transmission sécurisé</a>.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ============================================
+         FOOTER
+         Identique sur toutes les pages.
+    ============================================ -->
+    <footer id="contact">
+        <p>Ce site n'est pas affilié officiellement à Trask Industries.</p>
+        <p>Vous avez vu quelque chose ? 
+            <a href="mailto:alt.cq-4p92pch@yopmail.com" class="secret-link">
+                Envoyez les données cryptées ici
+            </a>.
+    </footer>
+
+    <!-- ============================================
+         SCRIPTS
+         script.js contient initHotspotFilters() qui gère
+         le filtrage par catégorie via les boutons.
+         La vérification de session empêche l'accès direct.
+    ============================================ -->
+    <script src="script.js"></script>
+    <script>
+        /* Vérification de session : si l'utilisateur n'a pas
+           entré la clé sur index.html, on le redirige */
+        if (sessionStorage.getItem('accessGranted') !== 'true') {
+            window.location.href = 'index.html';
+        }
+    </script>
+
+</body>
+</html>

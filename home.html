@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Recensement - Accueil</title>
+    <!-- Fichier CSS externe pour séparer style et structure (interopérabilité) -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ============================================
+         EFFETS VISUELS CRT
+         Ces deux div couvrent tout l'écran (position:fixed)
+         pour simuler un vieil écran de surveillance.
+         pointer-events:none les rend "transparents" aux clics.
+    ============================================ -->
+    <div class="scanlines"></div>
+    <div class="noise-overlay"></div>
+
+    <!-- ENTÊTE & NAVIGATION GLOBALE
+         On retrouve cette même barre sur toutes les pages pour la cohérence.
+         Chaque lien pointe vers une page dédiée au lieu d'une ancre (#). -->
+    <header>
+        <div class="header-content">
+            <div class="brand neon-green">LE RECENSEMENT</div>
+            <nav>
+                <!-- Navigation inter-pages : chaque catégorie a sa propre page -->
+                <a href="home.html" class="nav-link active">Accueil</a>
+                <a href="hotspot.html" class="nav-link">HotSpot</a>
+                <a href="mutants.html" class="nav-link">Mutants</a>
+                <a href="superiors.html" class="nav-link">Homo Superior</a>
+                <a href="transmission.html" class="nav-link">Transmission</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- SECTION D'INTRODUCTION / TABLEAU DE BORD -->
+        <section class="dashboard-section">
+            <h1 class="neon-green">PROTOCOLE SENTINELLE — TABLEAU DE BORD</h1>
+            <p class="intro-text">
+                Bienvenue dans la base de données centralisée de Trask Industries.
+                Sélectionnez une catégorie pour consulter les dossiers classifiés.
+            </p>
+
+            <!-- Grille de navigation visuelle vers les 3 grandes sections.
+                 Chaque "hub-card" est un lien cliquable (balise <a>) stylisé en carte. -->
+            <div class="hub-grid">
+
+                <a href="hotspot.html" class="hub-card hub-hotspot">
+                    <span class="hub-icon">⚠️</span>
+                    <h2>HOTSPOT</h2>
+                    <p>Derniers signalements & photos à la volée</p>
+                </a>
+
+                <a href="mutants.html" class="hub-card hub-mutant">
+                    <!-- L'emoji sert d'icône visuelle rapide, 
+                         accessible même sans chargement d'images -->
+                    <span class="hub-icon">🧬</span>
+                    <h2>MUTANTS</h2>
+                    <p>Sujets porteurs du Gène X identifiés</p>
+                </a>
+
+                <a href="superiors.html" class="hub-card hub-superior">
+                    <span class="hub-icon">👁️</span>
+                    <h2>HOMO SUPERIOR</h2>
+                    <p>Menaces globales & entités surhumaines</p>
+                </a>
+
+            </div>
+        </section>
+
+        <!-- APERÇU RAPIDE : derniers ajouts (donne de la vie à l'accueil)
+             Conteneur rempli dynamiquement par generateActivityFeed() 
+             dans script.js — les messages changent à chaque rechargement -->
+        <section class="preview-section">
+            <h2 class="neon-green">📡 ACTIVITÉ RÉCENTE</h2>
+            <div class="preview-ticker" id="activity-feed">
+                <!-- JavaScript injectera les lignes de ticker ici -->
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER identique sur toutes les pages -->
+    <footer id="contact">
+        <p>Ce site n'est pas affilié officiellement à Trask Industries.</p>
+        <p>Vous avez vu quelque chose ? 
+            <a href="mailto:alt.cq-4p92pch@yopmail.com" class="secret-link">
+                Envoyez les données cryptées ici
+            </a>.
+        </p>
+        <p>Dernière synchronisation : <span id="last-sync"></span></p>
+    </footer>
+
+    <!-- Fichier JS externe (interopérabilité : logique séparée du HTML) -->
+    <script src="script.js"></script>
+    <script>
+        /* Vérification de session : si l'utilisateur n'a pas entré la clé
+           sur index.html, sessionStorage ne contient pas 'accessGranted'.
+           On le redirige vers la page de login. */
+        if (sessionStorage.getItem('accessGranted') !== 'true') {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

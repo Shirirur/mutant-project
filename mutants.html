@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mutants Identifiés - Base de données</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <div class="brand">LE RECENSEMENT</div>
+            <nav>
+                <a href="home.html" class="nav-link">Accueil</a>
+                <a href="hotspot.html" class="nav-link">HotSpot</a>
+                <a href="mutants.html" class="nav-link active">Mutants</a>
+                <a href="superiors.html" class="nav-link">Homo Superior</a>
+                <a href="transmission.html" class="nav-link">Transmission</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-title-section">
+            <h1>🧬 MUTANTS IDENTIFIÉS — GÈNE X CONFIRMÉ</h1>
+            <p class="subtitle">
+                Registre des sujets porteurs du Gène X. Classement Trask Industries.
+            </p>
+        </section>
+
+        <!-- Barre de recherche dédiée à cette page.
+             L'événement "onkeyup" déclenche le filtrage à chaque frappe clavier.
+             On passe 'mutant' en argument pour ne filtrer que cette catégorie. -->
+        <section id="search-section">
+            <input type="text" 
+                   id="search-bar" 
+                   placeholder="Rechercher un mutant par Nom, Alias ou Capacité..." 
+                   onkeyup="filterByType('mutant')">
+        </section>
+
+        <!-- Conteneur où le JS injectera dynamiquement les fiches.
+             L'ID "mutant-list" est ciblé par renderByType() dans script.js -->
+        <section class="database-container">
+            <div class="category-block">
+                <div class="card-list" id="mutant-list">
+                    <!-- Contenu généré dynamiquement par JavaScript -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact">
+        <p>Ce site n'est pas affilié officiellement à Trask Industries.</p>
+        <p>Vous avez vu quelque chose ? 
+            <a href="mailto:alt.cq-4p92pch@yopmail.com" class="secret-link">
+                Envoyez les données cryptées ici
+            </a>.
+        </p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Sécurité de session
+        if (sessionStorage.getItem('accessGranted') !== 'true') {
+            window.location.href = 'index.html';
+        }
+
+        /* Initialisation : on affiche uniquement les mutants au chargement.
+           renderByType() est une nouvelle fonction définie dans script.js
+           qui filtre la base de données par type ("mutant" ou "superior"). */
+        renderByType('mutant');
+    </script>
+</body>
+</html>

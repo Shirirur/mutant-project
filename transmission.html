@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <!-- La balise viewport rend la page responsive sur mobile et tablette.
+         width=device-width adapte la largeur à l'écran,
+         initial-scale=1.0 empêche le zoom automatique. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transmission Sécurisée - Canal Chiffré</title>
+    <!-- Lien vers le fichier CSS externe (séparation structure/style) -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ============================================
+         HEADER GLOBAL
+         Même barre de navigation que sur toutes les pages
+         pour garder une cohérence de site.
+         La classe "active" indique la page courante.
+    ============================================ -->
+    <header>
+        <div class="header-content">
+            <div class="brand">LE RECENSEMENT</div>
+            <nav>
+                <a href="home.html" class="nav-link">Accueil</a>
+                <a href="hotspot.html" class="nav-link">HotSpot</a>
+                <a href="mutants.html" class="nav-link">Mutants</a>
+                <a href="superiors.html" class="nav-link">Homo Superior</a>
+                <!-- "active" sur cette page car c'est la page courante -->
+                <a href="transmission.html" class="nav-link active">Transmission</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- ============================================
+             SECTION TITRE DE PAGE
+             Donne le contexte immédiat à l'utilisateur.
+             Réutilise la classe commune "page-title-section"
+             définie dans le CSS pour toutes les pages.
+        ============================================ -->
+        <section class="page-title-section">
+            <h1>📡 TRANSMISSION SÉCURISÉE — CANAL CHIFFRÉ</h1>
+            <p class="subtitle">
+                Ce canal est réservé aux observateurs terrain. 
+                Toute information sera traitée de manière confidentielle.
+            </p>
+        </section>
+
+        <!-- ============================================
+             SECTION PRINCIPALE : ALERTE + FORMULAIRE
+             Contient le message d'accroche et le formulaire
+             de témoignage complet.
+        ============================================ -->
+        <section class="transmission-section">
+
+            <!-- BLOC D'AVERTISSEMENT
+                 Stylisé comme un message d'alerte officiel
+                 pour renforcer l'immersion dans l'univers Trask. -->
+            <div class="transmission-alert">
+                <span class="alert-icon">⚠️</span>
+                <p>
+                    Si vous avez observé quelque chose de <strong>surnaturel</strong>, 
+                    un comportement anormal, ou un individu présentant des capacités 
+                    hors du commun, <strong>déposez vos témoignages ici</strong>.
+                </p>
+                <p class="alert-sub">
+                    Vos données sont transmises via un canal sécurisé. 
+                    Ne mentionnez jamais votre identité réelle.
+                </p>
+            </div>
+
+            <!-- ============================================
+                 FORMULAIRE DE TÉMOIGNAGE
+                 
+                 ⚠️ Pas de action="mailto:" ni de enctype ici !
+                 L'envoi est géré par JavaScript (fonction sendTestimony)
+                 pour encoder correctement les accents et caractères spéciaux.
+                 
+                 onsubmit="sendTestimony(); return false;"
+                 → sendTestimony() : appelle notre fonction JS d'envoi.
+                 → return false : empêche le rechargement de la page
+                   (comportement par défaut d'un formulaire HTML).
+            ============================================ -->
+            <form class="transmission-form" 
+                  id="testimony-form"
+                  onsubmit="sendTestimony(); return false;">
+
+                <!-- CHAMP : NOM DE CODE
+                     L'attribut "required" empêche l'envoi si le champ est vide.
+                     Le navigateur affiche automatiquement un message d'erreur. -->
+                <div class="form-group">
+                    <label for="codename">NOM DE CODE / IDENTIFIANT</label>
+                    <input type="text" 
+                           id="codename" 
+                           name="Nom_de_code" 
+                           placeholder="Ex: Observateur-7, Anonyme..."
+                           required>
+                </div>
+
+                <!-- CHAMP : LIEU
+                     type="text" est le type par défaut pour une saisie libre. -->
+                <div class="form-group">
+                    <label for="location">📍 LIEU DE L'OBSERVATION</label>
+                    <input type="text" 
+                           id="location" 
+                           name="Lieu" 
+                           placeholder="Ex: Brooklyn, NY — Parking souterrain, 3e niveau"
+                           required>
+                </div>
+
+                <!-- CHAMP : DATE ET HEURE
+                     type="datetime-local" affiche un sélecteur de date/heure natif
+                     dans le navigateur (pas besoin de librairie externe). -->
+                <div class="form-group">
+                    <label for="datetime">🕐 DATE ET HEURE DE L'OBSERVATION</label>
+                    <input type="datetime-local" 
+                           id="datetime" 
+                           name="Date_heure">
+                </div>
+
+                <!-- CHAMP : TYPE DE PHÉNOMÈNE
+                     La balise <select> crée un menu déroulant.
+                     La première <option> avec "disabled selected" sert de placeholder :
+                     elle est affichée par défaut mais ne peut pas être soumise. -->
+                <div class="form-group">
+                    <label for="phenomenon">TYPE DE PHÉNOMÈNE</label>
+                    <select id="phenomenon" name="Type_phenomene" required>
+                        <option value="" disabled selected>— Sélectionnez —</option>
+                        <option value="Capacité physique anormale">Capacité physique anormale</option>
+                        <option value="Manifestation énergétique">Manifestation énergétique</option>
+                        <option value="Altération de l'environnement">Altération de l'environnement</option>
+                        <option value="Téléportation / Disparition">Téléportation / Disparition</option>
+                        <option value="Métamorphose">Métamorphose</option>
+                        <option value="Phénomène psychique">Phénomène psychique / Télépathie</option>
+                        <option value="Technologie inconnue">Technologie inconnue</option>
+                        <option value="Autre">Autre (préciser dans le rapport)</option>
+                    </select>
+                </div>
+
+                <!-- CHAMP : NIVEAU D'URGENCE (Boutons radio)
+                     Les boutons radio partagent le même attribut name="Urgence"
+                     ce qui garantit qu'un seul peut être coché à la fois.
+                     "checked" sur "Modéré" le pré-sélectionne par défaut. -->
+                <div class="form-group">
+                    <label>NIVEAU D'URGENCE ESTIMÉ</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="Urgence" value="Faible"> 
+                            <span class="radio-custom low">FAIBLE</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="Urgence" value="Modéré" checked>
+                            <span class="radio-custom medium">MODÉRÉ</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="Urgence" value="Élevé">
+                            <span class="radio-custom high">ÉLEVÉ</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="Urgence" value="Critique">
+                            <span class="radio-custom critical">CRITIQUE</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- CHAMP : RAPPORT DÉTAILLÉ
+                     <textarea> permet une saisie de texte multi-lignes.
+                     L'attribut "rows" définit la hauteur visible initiale. -->
+                <div class="form-group">
+                    <label for="report">📝 RAPPORT DÉTAILLÉ</label>
+                    <textarea id="report" 
+                              name="Rapport" 
+                              rows="8" 
+                              placeholder="Décrivez ce que vous avez observé avec le maximum de détails : apparence du sujet, durée du phénomène, témoins éventuels..."
+                              required></textarea>
+                </div>
+
+                <!-- CHAMP : CASE À COCHER DE CONSENTEMENT
+                     L'attribut "required" sur la checkbox oblige l'utilisateur
+                     à la cocher avant de pouvoir soumettre le formulaire. -->
+                <div class="form-group checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="consent" required>
+                        <span>Je confirme que ces informations sont transmises 
+                        sous protocole Trask et que mon identité restera confidentielle.</span>
+                    </label>
+                </div>
+
+                <!-- BOUTONS D'ACTION
+                     type="submit" déclenche la validation HTML5 (vérifie les "required")
+                     puis appelle la fonction sendTestimony() définie dans le onsubmit.
+                     type="reset" remet tous les champs à leur valeur initiale. -->
+                <div class="form-actions">
+                    <button type="submit" class="btn-transmit">
+                        📡 TRANSMETTRE LE RAPPORT
+                    </button>
+                    <button type="reset" class="btn-reset">
+                        EFFACER
+                    </button>
+                </div>
+
+            </form>
+
+            <!-- ============================================
+                 BLOC D'INFORMATIONS COMPLÉMENTAIRES
+                 Donne du contexte narratif supplémentaire
+                 et renforce l'ambiance "agence secrète".
+            ============================================ -->
+            <div class="transmission-info">
+                <h4>📋 PROTOCOLE DE TRANSMISSION</h4>
+                <ul>
+                    <li>Toutes les transmissions sont horodatées et archivées automatiquement.</li>
+                    <li>N'utilisez jamais votre vrai nom — un nom de code suffit.</li>
+                    <li>En cas de danger immédiat, ne restez pas sur place.</li>
+                    <li>Les rapports sont analysés sous 24 à 48 heures par nos équipes.</li>
+                    <li>Canal maintenu par Trask Industries — Division Observation Terrain.</li>
+                </ul>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- ============================================
+         FOOTER
+         Identique sur toutes les pages pour la cohérence.
+    ============================================ -->
+    <footer id="contact">
+        <p>Ce site n'est pas affilié officiellement à Trask Industries.</p>
+        <p>Canal de transmission actif — Protocole Sentinelle v2.4</p>
+    </footer>
+
+    <!-- ============================================
+         SCRIPTS
+         Le fichier script.js contient la fonction sendTestimony()
+         qui gère l'encodage UTF-8 et l'ouverture du client mail.
+         Il contient aussi la vérification d'accès (sessionStorage).
+    ============================================ -->
+    <script src="script.js"></script>
+    <script>
+        // Vérification de sécurité : si l'utilisateur n'est pas passé par le login,
+        // sessionStorage ne contient pas 'accessGranted' et on le redirige.
+        if (sessionStorage.getItem('accessGranted') !== 'true') {
+            window.location.href = 'index.html';
+        }
+    </script>
+
+</body>
+</html>
